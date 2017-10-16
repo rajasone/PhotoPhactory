@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="photography_slide">#e4d8a3</color>
+    <color name="videography_slide">#c9d12c</color>
+    <color name="publisher_slide">#6ed12c</color>
+    <color name="camera_retailer_slide">#d17e2c</color>
+
+    <color name="active_dots">#ffffff</color>
+    <color name="inactive_dots">#9f9489</color>
+</resources>

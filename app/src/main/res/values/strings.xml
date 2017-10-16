@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">"Photo Phactory "</string>
+    <string name="action_settings">Settings</string>
+    <string name="photography_title">Photography</string>
+    <string name="photography_description">This is the description of the photography</string>
+
+    <string name="videography_title">Videography</string>
+    <string name="videography_description">This is the description of the videography</string>
+
+    <string name="publishers_title">Publishers</string>
+    <string name="Publishers_description">This is the description of the publishers</string>
+
+    <string name="retailers_title">Retailers</string>
+    <string name="retailers_description">This is the description of the retailers</string>
+    <string name="skip_button">Skip</string>
+    <string name="next_button">Next</string>
+    <string name="title_activity_home">Home Activity</string>
+    <string name="open_drawer">Open Drawer</string>
+    <string name="close_drawer">Close Drawer</string>
+    <string name="navigation_string">Navigation</string>
+    <string name="app_image">Image of app</string>
+</resources>
