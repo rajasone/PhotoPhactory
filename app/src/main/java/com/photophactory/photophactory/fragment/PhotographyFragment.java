@@ -34,7 +34,7 @@ public class PhotographyFragment extends Fragment implements HomeContract.Fragme
         super.onCreate(savedInstanceState);
 
         if (savedInstanceState != null) {
-            ((HomeActivity) getActivity()).setCurrentFragmentState(HomeFragment.PHOTOGRAPHY_FRAGMENT);
+//            ((HomeActivity) getActivity()).setCurrentFragmentState(HomeFragment.PHOTOGRAPHY_FRAGMENT);
         }
         Log.d(TAG, "onCreate: end");
     }
@@ -61,6 +61,6 @@ public class PhotographyFragment extends Fragment implements HomeContract.Fragme
     @Override
     public void onSaveInstanceState(Bundle outState) {
         Log.d(TAG, "onSaveInstanceState: Photography state saving ---> ");
-        ((HomeActivity) getActivity()).setCurrentFragmentState(HomeFragment.PHOTOGRAPHY_FRAGMENT);
+//        ((HomeActivity) getActivity()).setCurrentFragmentState(HomeFragment.PHOTOGRAPHY_FRAGMENT);
     }
 }

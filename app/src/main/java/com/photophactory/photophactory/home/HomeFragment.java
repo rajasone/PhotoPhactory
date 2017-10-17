@@ -81,22 +81,22 @@ public class HomeFragment extends Fragment implements HomeContract.FragmentView,
         switch (view.getId()) {
             case R.id.photography_home_parent:
                 showToast("Add photo fragment");
-                ((HomeActivity) getActivity()).setCurrentFragmentState(PHOTOGRAPHY_FRAGMENT);
+//                ((HomeActivity) getActivity()).setCurrentFragmentState(PHOTOGRAPHY_FRAGMENT);
                 presenter.replaceFragment(PhotographyFragment.getInstance(), PhotographyFragment.class.getSimpleName());
                 break;
             case R.id.videography_home_parent:
                 showToast("Add video fragment");
-                ((HomeActivity) getActivity()).setCurrentFragmentState(VIDEOGRAPHY_FRAGMENT);
+//                ((HomeActivity) getActivity()).setCurrentFragmentState(VIDEOGRAPHY_FRAGMENT);
                 presenter.replaceFragment(VideographyFragment.getInstance(), VideographyFragment.class.getSimpleName());
                 break;
             case R.id.retailer_home_parent:
                 showToast("Add retailer fragment");
-                ((HomeActivity) getActivity()).setCurrentFragmentState(RETAILER_FRAGMENT);
+//                ((HomeActivity) getActivity()).setCurrentFragmentState(RETAILER_FRAGMENT);
                 presenter.replaceFragment(RetailerFragment.getInstance(), RetailerFragment.class.getSimpleName());
                 break;
             case R.id.publisher_home_parent:
                 showToast("Add publisher fragment");
-                ((HomeActivity) getActivity()).setCurrentFragmentState(PUBLISHER_FRAGMENT);
+//                ((HomeActivity) getActivity()).setCurrentFragmentState(PUBLISHER_FRAGMENT);
                 presenter.replaceFragment(PublisherFragment.getInstance(), PublisherFragment.class.getSimpleName());
                 break;
         }

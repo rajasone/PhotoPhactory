@@ -32,7 +32,7 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.Acti
     private ActivityHomeBinding homeBinding;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private HomeContract.Presenter presenter;
-    private int currentFragmentState;
+//    private int currentFragmentState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +49,62 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.Acti
         homeBinding.drawer.setOnItemClickListener(this);
         getSupportFragmentManager().addOnBackStackChangedListener(this);
 
+        if (savedInstanceState == null) {
+            HomeFragment homeFragment = HomeFragment.newInstance();
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.home_fragment_container, homeFragment, HomeFragment.class.getSimpleName())
+                    .commit();
+            homeFragment.setPresenter(new HomePresenter(homeFragment, this));
+        }
+
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.home_fragment_container);
+        if (fragment instanceof HomeFragment) {
+            Log.e(TAG, "onCreate: Instance of Home Fragment");
+            ((HomeFragment) fragment).setPresenter(new HomePresenter(((HomeFragment) fragment), this));
+        } else if (fragment instanceof PhotographyFragment) {
+//            Log.d(TAG, "onCreate: Fragment is instance of Photography fragment");
+//            Log.d(TAG, "onCreate: Visibility status ---> " + fragment.isVisible());
+//            PhotographyFragment photographyFragment = PhotographyFragment.getInstance();
+//            getSupportFragmentManager().beginTransaction()
+//                    .add(R.id.home_fragment_container, photographyFragment, PhotographyFragment.class.getSimpleName())
+//                    .addToBackStack(PhotographyFragment.class.getSimpleName())
+//                    .commit();
+            ((PhotographyFragment) fragment).setPresenter(new HomePresenter(((PhotographyFragment) fragment), this));
+        } else if (fragment instanceof VideographyFragment) {
+            Log.e(TAG, "onCreate: Instance of videography fragment");
+        } else {
+            Log.e(TAG, "onCreate: Fragment already exist");
+        }
+
+        /*
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.home_fragment_container);
+
+        if (fragment == null || fragment instanceof HomeFragment) {
+            // loads the Home Fragment
+            HomeFragment homeFragment = (HomeFragment) fragment;
+
+            if (fragment == null) {
+                homeFragment = HomeFragment.newInstance();
+                getSupportFragmentManager().beginTransaction()
+                        .add(R.id.home_fragment_container, homeFragment, HomeFragment.class.getSimpleName())
+                        .addToBackStack(HomeFragment.class.getSimpleName())
+
+                        .commit();
+            }
+            homeFragment.setPresenter(new HomePresenter(homeFragment, this));
+        } else {
+            if (fragment instanceof PhotographyFragment) {
+                PhotographyFragment photographyFragment = (PhotographyFragment) fragment;
+//                getSupportFragmentManager().beginTransaction()
+//                        .add(R.id.home_fragment_container, photographyFragment, HomeFragment.class.getSimpleName())
+//                        .addToBackStack(HomeFragment.class.getSimpleName())
+//                        .commit();
+            }
+            // match the fragment instance to check what is the current fragment
+        }
+        */
+
+        /*
         if (savedInstanceState != null) {
             setCurrentFragmentState(savedInstanceState.getInt(BuildConfig.CURRENT_FRAGMENT, 0));
         }
@@ -77,15 +133,19 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.Acti
                 Log.d(TAG, "onCreate: load the video graphy fragment");
             }
         }
+        */
     }
 
 
+    /*
     @Override
     protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
         Log.d(TAG, "onSaveInstanceState: Saving teh fragment state ----> " + getCurrentFragmentState());
         Log.d(TAG, "onSaveInstanceState: Fragment stack count ----> " + getSupportFragmentManager().getBackStackEntryCount());
         outState.putInt(BuildConfig.CURRENT_FRAGMENT, getCurrentFragmentState());
     }
+    */
 
     private Fragment checkCurrentFragmentAndInflate(int currentFragment) {
 
@@ -102,6 +162,7 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.Acti
         return null;
     }
 
+    /*
     public int getCurrentFragmentState() {
         return currentFragmentState;
     }
@@ -110,6 +171,7 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.Acti
         this.currentFragmentState = currentFragmentState;
         Log.e(TAG, "setCurrentFragmentState: State Saved");
     }
+    */
 
     private Fragment addFragmentInMainContainer(Fragment fragment, String fragmentName) {
         getSupportFragmentManager().beginTransaction()
@@ -154,21 +216,25 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.Acti
         return actionBarDrawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
     }
 
+                    /*
+
     @Override
     public void onBackPressed() {
         Log.d(TAG, "onBackPressed: start");
+
         getSupportFragmentManager().popBackStack();
 
         if (homeBinding.drawerParent.isDrawerOpen(Gravity.START)) {
             homeBinding.drawerParent.closeDrawers();
         }
 
+        super.onBackPressed();
+
         if (getSupportFragmentManager().getBackStackEntryCount() - 1 == 0) {
             Log.d(TAG, "onBackPressed: Count in IF  ----> " + (getSupportFragmentManager().getBackStackEntryCount() - 1));
             finish();
         } else if (getSupportFragmentManager().getBackStackEntryCount() - 1 == 1) {
             Log.d(TAG, "onBackPressed: show home fragment");
-            setCurrentFragmentState(HomeFragment.HOME_FRAGMENT);
             Log.d(TAG, "onBackPressed: Count in ELSE IF  ----> " + (getSupportFragmentManager().getBackStackEntryCount() - 1));
 
             String name = getSupportFragmentManager().getBackStackEntryAt(0).getName();
@@ -186,6 +252,7 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.Acti
         }
         Log.d(TAG, "onBackPressed: end");
     }
+        */
 
 
     @Override
@@ -210,6 +277,10 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.Acti
         for (int i = getSupportFragmentManager().getBackStackEntryCount() - 1; i >= 0; i--) {
             Log.e(TAG, "onBackStackChanged: Name ----> " + getSupportFragmentManager().getBackStackEntryAt(i));
             Log.d(TAG, "onBackStackChanged: ----------------");
+        }
+
+        if ((getSupportFragmentManager().getBackStackEntryCount() - 1) == -1) {
+            // finish();
         }
         Log.d(TAG, "onBackStackChanged: end");
     }
