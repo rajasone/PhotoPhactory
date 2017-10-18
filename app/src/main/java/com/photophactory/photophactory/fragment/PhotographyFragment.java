@@ -28,16 +28,6 @@ public class PhotographyFragment extends Fragment implements HomeContract.Fragme
         return new PhotographyFragment();
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        Log.d(TAG, "onCreate: start");
-        super.onCreate(savedInstanceState);
-
-        if (savedInstanceState != null) {
-//            ((HomeActivity) getActivity()).setCurrentFragmentState(HomeFragment.PHOTOGRAPHY_FRAGMENT);
-        }
-        Log.d(TAG, "onCreate: end");
-    }
 
     public void setPresenter(HomeContract.Presenter presenter) {
         this.presenter = presenter;
@@ -56,11 +46,5 @@ public class PhotographyFragment extends Fragment implements HomeContract.Fragme
     @Override
     public void showToast(String message) {
 
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        Log.d(TAG, "onSaveInstanceState: Photography state saving ---> ");
-//        ((HomeActivity) getActivity()).setCurrentFragmentState(HomeFragment.PHOTOGRAPHY_FRAGMENT);
     }
 }

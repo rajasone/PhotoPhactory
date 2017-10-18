@@ -4,6 +4,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,11 +26,6 @@ public class HomeFragment extends Fragment implements HomeContract.FragmentView,
     private static final String TAG = HomeFragment.class.getSimpleName();
     private HomeDefaultFragmentBinding homeFragmentBinding;
     private HomeContract.Presenter presenter;
-    public static final int HOME_FRAGMENT = 0;
-    public static final int PHOTOGRAPHY_FRAGMENT = 1;
-    public static final int VIDEOGRAPHY_FRAGMENT = 2;
-    public static final int RETAILER_FRAGMENT = 3;
-    public static final int PUBLISHER_FRAGMENT = 4;
 
     public static HomeFragment newInstance() {
         return new HomeFragment();
@@ -81,23 +77,19 @@ public class HomeFragment extends Fragment implements HomeContract.FragmentView,
         switch (view.getId()) {
             case R.id.photography_home_parent:
                 showToast("Add photo fragment");
-//                ((HomeActivity) getActivity()).setCurrentFragmentState(PHOTOGRAPHY_FRAGMENT);
-                presenter.replaceFragment(PhotographyFragment.getInstance(), PhotographyFragment.class.getSimpleName());
+                ((HomeActivity) getActivity()).replaceFragment(PhotographyFragment.getInstance(), PhotographyFragment.class.getSimpleName());
                 break;
             case R.id.videography_home_parent:
                 showToast("Add video fragment");
-//                ((HomeActivity) getActivity()).setCurrentFragmentState(VIDEOGRAPHY_FRAGMENT);
-                presenter.replaceFragment(VideographyFragment.getInstance(), VideographyFragment.class.getSimpleName());
+                ((HomeActivity) getActivity()).replaceFragment(VideographyFragment.getInstance(), VideographyFragment.class.getSimpleName());
                 break;
             case R.id.retailer_home_parent:
                 showToast("Add retailer fragment");
-//                ((HomeActivity) getActivity()).setCurrentFragmentState(RETAILER_FRAGMENT);
-                presenter.replaceFragment(RetailerFragment.getInstance(), RetailerFragment.class.getSimpleName());
+                ((HomeActivity) getActivity()).replaceFragment(RetailerFragment.getInstance(), RetailerFragment.class.getSimpleName());
                 break;
             case R.id.publisher_home_parent:
                 showToast("Add publisher fragment");
-//                ((HomeActivity) getActivity()).setCurrentFragmentState(PUBLISHER_FRAGMENT);
-                presenter.replaceFragment(PublisherFragment.getInstance(), PublisherFragment.class.getSimpleName());
+                ((HomeActivity) getActivity()).replaceFragment(PublisherFragment.getInstance(), PublisherFragment.class.getSimpleName());
                 break;
         }
     }

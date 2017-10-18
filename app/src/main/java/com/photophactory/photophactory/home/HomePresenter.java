@@ -16,8 +16,4 @@ public class HomePresenter implements HomeContract.Presenter {
         this.activityView = activityView;
     }
 
-    @Override
-    public void replaceFragment(Fragment fragmentToPlace, String fragmentName) {
-        activityView.replaceFragment(fragmentToPlace, fragmentName);
-    }
 }

@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 
 public interface HomeContract {
     interface ActivityView {
-        void replaceFragment(Fragment fragmentToPlace, String fragmentName);
     }
 
     interface FragmentView {
@@ -16,6 +15,5 @@ public interface HomeContract {
     }
 
     interface Presenter {
-        void replaceFragment(Fragment fragmentToPlace, String fragmentName);
     }
 }
