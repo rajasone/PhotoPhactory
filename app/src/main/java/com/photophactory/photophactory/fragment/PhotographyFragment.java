@@ -1,5 +1,6 @@
 package com.photophactory.photophactory.fragment;
 
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,9 +12,7 @@ import android.view.ViewGroup;
 
 import com.photophactory.photophactory.R;
 import com.photophactory.photophactory.databinding.PhotographyContentFragmentBinding;
-import com.photophactory.photophactory.home.HomeActivity;
 import com.photophactory.photophactory.home.HomeContract;
-import com.photophactory.photophactory.home.HomeFragment;
 
 /**
  * Created by rajaSaboor on 10/7/2017.
@@ -28,6 +27,12 @@ public class PhotographyFragment extends Fragment implements HomeContract.Fragme
         return new PhotographyFragment();
     }
 
+    @Override
+    public void onAttach(Context context) {
+        Log.d(TAG, "onAttach: start");
+        super.onAttach(context);
+        Log.d(TAG, "onAttach: end");
+    }
 
     public void setPresenter(HomeContract.Presenter presenter) {
         this.presenter = presenter;
@@ -42,6 +47,20 @@ public class PhotographyFragment extends Fragment implements HomeContract.Fragme
         return photographyContentFragmentBinding.getRoot();
     }
 
+
+    @Override
+    public void onDetach() {
+        Log.e(TAG, "onDetach: start");
+        super.onDetach();
+        Log.e(TAG, "onDetach: End");
+    }
+
+    @Override
+    public void onDestroyView() {
+        Log.e(TAG, "onDestroyView: start");
+        super.onDestroyView();
+        Log.e(TAG, "onDestroyView: end");
+    }
 
     @Override
     public void showToast(String message) {

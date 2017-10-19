@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/PhotoPhactory.iml" filepath="$PROJECT_DIR$/PhotoPhactory.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PhotoPhactory-master.iml" filepath="$PROJECT_DIR$/PhotoPhactory-master.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

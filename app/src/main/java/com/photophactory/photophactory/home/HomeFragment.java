@@ -1,10 +1,10 @@
 package com.photophactory.photophactory.home;
 
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,11 +26,25 @@ public class HomeFragment extends Fragment implements HomeContract.FragmentView,
     private static final String TAG = HomeFragment.class.getSimpleName();
     private HomeDefaultFragmentBinding homeFragmentBinding;
     private HomeContract.Presenter presenter;
+    private PresenterController presenterController;
 
     public static HomeFragment newInstance() {
         return new HomeFragment();
     }
 
+
+    @Override
+    public void onAttach(Context context) {
+        Log.d(TAG, "onAttach: Start");
+        super.onAttach(context);
+        try {
+            presenterController = (PresenterController) context;
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            Log.d(TAG, "onAttach: Activity is not implemented a interface");
+        }
+        Log.d(TAG, "onAttach: End");
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,6 +61,12 @@ public class HomeFragment extends Fragment implements HomeContract.FragmentView,
         homeFragmentBinding.setHomeHandler(this);
         Log.d(TAG, "onCreateView: end");
         return homeFragmentBinding.getRoot();
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        presenterController.attachFragment(this);
     }
 
     public void setPresenter(HomeContract.Presenter presenter) {
@@ -77,20 +97,24 @@ public class HomeFragment extends Fragment implements HomeContract.FragmentView,
         switch (view.getId()) {
             case R.id.photography_home_parent:
                 showToast("Add photo fragment");
-                ((HomeActivity) getActivity()).replaceFragment(PhotographyFragment.getInstance(), PhotographyFragment.class.getSimpleName());
+                presenter.replaceFragment(PhotographyFragment.getInstance(), PhotographyFragment.class.getSimpleName());
                 break;
             case R.id.videography_home_parent:
                 showToast("Add video fragment");
-                ((HomeActivity) getActivity()).replaceFragment(VideographyFragment.getInstance(), VideographyFragment.class.getSimpleName());
+                presenter.replaceFragment(VideographyFragment.getInstance(), VideographyFragment.class.getSimpleName());
                 break;
             case R.id.retailer_home_parent:
                 showToast("Add retailer fragment");
-                ((HomeActivity) getActivity()).replaceFragment(RetailerFragment.getInstance(), RetailerFragment.class.getSimpleName());
+                presenter.replaceFragment(RetailerFragment.getInstance(), RetailerFragment.class.getSimpleName());
                 break;
             case R.id.publisher_home_parent:
                 showToast("Add publisher fragment");
-                ((HomeActivity) getActivity()).replaceFragment(PublisherFragment.getInstance(), PublisherFragment.class.getSimpleName());
+                presenter.replaceFragment(PublisherFragment.getInstance(), PublisherFragment.class.getSimpleName());
                 break;
         }
+    }
+
+    interface PresenterController {
+        void attachFragment(Fragment fragment);
     }
 }

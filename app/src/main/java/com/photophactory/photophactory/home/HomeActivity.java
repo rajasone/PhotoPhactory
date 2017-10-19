@@ -2,15 +2,12 @@ package com.photophactory.photophactory.home;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,14 +17,11 @@ import android.widget.Toast;
 import com.photophactory.photophactory.BuildConfig;
 import com.photophactory.photophactory.R;
 import com.photophactory.photophactory.databinding.ActivityHomeBinding;
-import com.photophactory.photophactory.fragment.PhotographyFragment;
-import com.photophactory.photophactory.fragment.PublisherFragment;
-import com.photophactory.photophactory.fragment.RetailerFragment;
-import com.photophactory.photophactory.fragment.VideographyFragment;
 
 import java.util.Arrays;
 
-public class HomeActivity extends AppCompatActivity implements HomeContract.ActivityView, AdapterView.OnItemClickListener, FragmentManager.OnBackStackChangedListener {
+public class HomeActivity extends AppCompatActivity implements HomeContract.ActivityView, AdapterView.OnItemClickListener,
+        HomeFragment.PresenterController {
 
     private static final String TAG = HomeActivity.class.getSimpleName();
     private ActivityHomeBinding homeBinding;
@@ -45,16 +39,15 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.Acti
         setUpNavigationView();
         setUpDrawer();
         homeBinding.drawer.setOnItemClickListener(this);
-        getSupportFragmentManager().addOnBackStackChangedListener(this);
 
         if (savedInstanceState == null) {
-            Log.d(TAG, "onCreate: bundle is NULL");
+            Log.e(TAG, "onCreate: bundle is NULL");
             HomeFragment homeFragment = HomeFragment.newInstance();
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.home_fragment_container, homeFragment, HomeFragment.class.getSimpleName())
                     .commitNow();
-            homeFragment.setPresenter(new HomePresenter(homeFragment, this));
         }
+        presenter = new HomePresenter(null, this);
 
         /*
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.home_fragment_container);
@@ -117,6 +110,7 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.Acti
         homeBinding.drawerParent.closeDrawers();
     }
 
+    @Override
     public void replaceFragment(Fragment fragmentToPlace, String fragmentName) {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.home_fragment_container, fragmentToPlace)
@@ -125,14 +119,10 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.Acti
     }
 
     @Override
-    public void onBackStackChanged() {
-        Log.d(TAG, "onBackStackChanged: Stack Changed");
-        Log.e(TAG, "onBackStackChanged: Count ----> " + (getSupportFragmentManager().getBackStackEntryCount() - 1));
-
-        for (int i = getSupportFragmentManager().getBackStackEntryCount() - 1; i >= 0; i--) {
-            Log.e(TAG, "onBackStackChanged: Name ----> " + getSupportFragmentManager().getBackStackEntryAt(i));
-            Log.d(TAG, "onBackStackChanged: ----------------");
-        }
-        Log.d(TAG, "onBackStackChanged: end");
+    public void attachFragment(Fragment fragment) {
+        Log.d(TAG, "attachFragment: Start");
+        presenter.setFragmentView((HomeContract.FragmentView) fragment);
+        ((HomeFragment) fragment).setPresenter(presenter);
+        Log.d(TAG, "attachFragment: End");
     }
 }
